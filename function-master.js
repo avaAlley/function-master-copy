@@ -130,6 +130,14 @@ function maybeNoises(object){
 //////////////////////////////////////////////////////////////////////
 
 function hasWord(string, word) {
+    var stringArray = string.split(' ');
+    for(var i = 0; i < stringArray.length; i++){
+        if(stringArray[i] === word){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
 
