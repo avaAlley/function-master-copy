@@ -4,6 +4,11 @@
 
 function objectValues(object) {
     // code
+    var valueArray = [];
+    for(var key in object){
+        valueArray.push(object[key]);
+    }
+    return valueArray;
 } 
 
 //////////////////////////////////////////////////////////////////////
@@ -11,7 +16,11 @@ function objectValues(object) {
 //////////////////////////////////////////////////////////////////////
 
 function keysToString(object) {
-
+    var stringArray = [];
+    for(var key in object){
+        stringArray.push(key);
+    }
+    return stringArray.join(' ');
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -19,7 +28,14 @@ function keysToString(object) {
 //////////////////////////////////////////////////////////////////////
 
 function valuesToString(object) {
-    
+    var valuesToJoin = [];
+    for (var key in object){
+        if(typeof object[key] === typeof ''){
+            valuesToJoin.push(object[key]);
+        }
+    }
+    var valuesString = valuesToJoin.join(' ');
+    return valuesString;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -27,7 +43,11 @@ function valuesToString(object) {
 //////////////////////////////////////////////////////////////////////
 
 function arrayOrObject(collection) {
-    
+    if(Array.isArray(collection)){
+        return 'array';
+    } else {
+        return 'object';
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -35,7 +55,9 @@ function arrayOrObject(collection) {
 //////////////////////////////////////////////////////////////////////
 
 function capitalizeWord(string) {
-    
+    // var capString = '';
+    var firstLetter = string.charAt(0).toUpperCase();
+    return firstLetter + string.slice(1);
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -43,7 +65,13 @@ function capitalizeWord(string) {
 //////////////////////////////////////////////////////////////////////
 
 function capitalizeAllWords(string) {
-    
+    var stringWordArray = string.split(' ');
+    var capStringsArray = []
+    for(var i = 0; i < stringWordArray.length; i++){
+        var firstLetter = stringWordArray[i].charAt(0).toUpperCase();
+        capStringsArray.push(firstLetter + stringWordArray[i].slice(1));
+    }
+    return capStringsArray.join(' ');
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -51,7 +79,8 @@ function capitalizeAllWords(string) {
 //////////////////////////////////////////////////////////////////////
 
 function welcomeMessage(object) {
-
+    var firstLetter = object.name.charAt(0).toUpperCase();
+    return 'Welcome ' + firstLetter + object.name.slice(1) + '!'
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -59,16 +88,42 @@ function welcomeMessage(object) {
 //////////////////////////////////////////////////////////////////////
 
 function profileInfo(object) {
-
+    var nameLetter = object.name.charAt(0).toUpperCase()
+    var speciesLetter = object.species.charAt(0).toUpperCase()
+    return nameLetter + object.name.slice(1) + " is a " + speciesLetter + object.species.slice(1);
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 9 - Maybe Noises /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function maybeNoises(object) {
+// function maybeNoises(object) {
+//     if (object.noises === true){
+//           if(object.noises.length === 0){
+//           return 'there are no noises';
+//       } else if(object.noises.length > 0) {
+//           return object.noises.join(' ');
+//       }
+//     } else {
+//           return 'there are no noises';
+//     }
+//   }
 
-}
+function maybeNoises(object){
+    if(Object.keys(object).length === 0){
+      return 'there are no noises';
+    } else if (Object.keys(object).length > 0){
+      for (var key in object){
+        if(object[key] === object.noises){
+          if(object.noises.length > 0){
+            return object.noises.join(' ');
+          } else {
+            return 'there are no noises';
+          }
+        }
+    }
+    }
+  }
 
 //////////////////////////////////////////////////////////////////////
 // Function 10 - Has Words ///////////////////////////////////////////
