@@ -131,14 +131,18 @@ function maybeNoises(object){
 
 function hasWord(string, word) {
     var stringArray = string.split(' ');
+    var testWord = false;
+    // console.log(stringArray);
     for(var i = 0; i < stringArray.length; i++){
         if(stringArray[i] === word){
-            return true;
-        } else {
-            return false;
+            testWord = true;
         }
     }
-
+    if(testWord === true){
+      return true;
+    } else if (testWord === false){
+      return false;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -146,23 +150,47 @@ function hasWord(string, word) {
 //////////////////////////////////////////////////////////////////////
 
 function addFriend (name, object) {
-
+    object.friends.push(name);
+    return object;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 12 - Is Friend ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function isFriend(name, object) {
-
-}
+function isFriend(name, object){
+    let isFriend = false;
+    if(Object.keys(object).length === 0){
+      return false;
+    } else if(Object.keys(object).length > 0){
+      for(var i = 0; i < object.friends.length; i++){
+        if(object.friends[i] === name){
+          isFriend = true;
+        }
+      }
+    }
+    if(isFriend === true){
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 //////////////////////////////////////////////////////////////////////
 // Function 13 - Non-Friends /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function nonFriends(name, array) {
-
+function nonFriends(name, array){
+  let notFriends = [];
+  
+  for(var i = 0; i < array.length; i++){
+    if(array[i].name !== name){
+      if(array[i].friends.includes(name) === false){
+        notFriends.push(array[i].name);
+      }
+    }
+  }
+  return notFriends;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -170,7 +198,8 @@ function nonFriends(name, array) {
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-
+  object[key] = value;
+  return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -178,7 +207,14 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-
+  for(var i = 0; i < array.length; i++){
+    for(var key in object){
+      if(key === array[i]){
+        delete object[key];
+      }
+    }
+  }
+  return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -186,7 +222,13 @@ function removeProperties(object, array) {
 //////////////////////////////////////////////////////////////////////
 
 function dedup(array) {
-
+  var nonDupeArr = []
+  for(var i = 0; i < array.length; i++){
+    if(!nonDupeArr.includes(array[i])){
+      nonDupeArr.push(array[i])
+    }
+  }
+  return nonDupeArr;
 }
 
 //////////////////////////////////////////////////////////////////////
